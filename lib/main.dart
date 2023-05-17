@@ -18,7 +18,7 @@ class InstaApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: RouteNames.loginScreen,
+      initialRoute: RouteNames.dashBoardScreen,
       getPages: AppRoute.route,
       initialBinding: InitBinding(),
     );

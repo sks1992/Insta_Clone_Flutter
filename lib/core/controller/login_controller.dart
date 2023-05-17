@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   late TextEditingController emailOrMobileNoOrUserNameController;
   late TextEditingController passwordController;
 
-  var showSaveProgress = false.obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -33,16 +33,16 @@ class LoginController extends GetxController {
       userName: emailOrMobileNoOrUserNameController.text,
       password: passwordController.text,
     );
-    showSaveProgress.value = true;
+    isLoading.value = true;
     var result = await _authApi.loginUser(model);
     if (result.isSuccess) {
-     // Get.offNamed(RouteNames.loginScreen);
+      Get.offNamed(RouteNames.dashBoardScreen);
       showSnackBar1("Success", "Your Login Success",
           type: SnackBarType.success);
     } else {
       showSnackBar1("Failed", result.errorMessage.toString());
     }
-    showSaveProgress.value = false;
+    isLoading.value = false;
   }
 
   bool validateUser() {
