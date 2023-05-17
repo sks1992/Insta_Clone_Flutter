@@ -2,21 +2,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:insta_clone_flutter/core/model/login_models.dart';
 
-import '../../app_routes.dart';
 import '../services/auth_api_service.dart';
+import '../services/shared_pref_service.dart';
 import '../util/helpers.dart';
+import 'auth_controller.dart';
 
 class LoginController extends GetxController {
   final _authApi = Get.find<AuthApiService>();
+  final _sharedService = Get.find<SharedPrefService>();
+  final _authController = Get.find<AuthController>();
+
   late TextEditingController emailOrMobileNoOrUserNameController;
   late TextEditingController passwordController;
 
-  var showSaveProgress = false.obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
-    emailOrMobileNoOrUserNameController = TextEditingController();
-    passwordController = TextEditingController();
+    emailOrMobileNoOrUserNameController =
+        TextEditingController(text: "sandeep");
+    passwordController = TextEditingController(text: "1234567");
     super.onInit();
   }
 
@@ -33,16 +38,18 @@ class LoginController extends GetxController {
       userName: emailOrMobileNoOrUserNameController.text,
       password: passwordController.text,
     );
-    showSaveProgress.value = true;
+    isLoading.value = true;
     var result = await _authApi.loginUser(model);
     if (result.isSuccess) {
-     // Get.offNamed(RouteNames.loginScreen);
-      showSnackBar1("Success", "Your Login Success",
-          type: SnackBarType.success);
+      _sharedService.storeAuthToken(result.token!);
+      var token = await _sharedService.getAuthToken();
+      print(token);
+
+      _authController.loggedIn.value = true;
     } else {
       showSnackBar1("Failed", result.errorMessage.toString());
     }
-    showSaveProgress.value = false;
+    isLoading.value = false;
   }
 
   bool validateUser() {

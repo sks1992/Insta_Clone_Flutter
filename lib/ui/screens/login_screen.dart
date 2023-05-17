@@ -38,11 +38,18 @@ class LoginScreen extends StatelessWidget {
                   labelText: "Enter Password",
                   obscureText: true,
                 ),
-                NewElevatedButton(
-                  label: "Login",
-                  onPressed: () async {
-                   await controller.login();
-                  },
+                const SizedBox(height: 20),
+                Obx(
+                  () => controller.isLoading.value
+                      ? const CircularProgressIndicator(
+                          color: Colors.blue,
+                        )
+                      : NewElevatedButton(
+                          label: "Login",
+                          onPressed: () async {
+                            await controller.login();
+                          },
+                        ),
                 ),
                 const SizedBox(height: 20),
                 Row(

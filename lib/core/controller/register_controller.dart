@@ -27,7 +27,7 @@ class RegisterController extends GetxController {
 
   var passwordShow = false.obs;
   var conformPasswordShow = false.obs;
-  var showSaveProgress = false.obs;
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -60,7 +60,7 @@ class RegisterController extends GetxController {
           : base64String(profileImage.value!),
     );
 
-    showSaveProgress.value = true;
+    isLoading.value = true;
     var result = await _authApi.registerUser(model);
     if (result.isSuccess) {
       Get.offNamed(RouteNames.loginScreen);
@@ -69,7 +69,7 @@ class RegisterController extends GetxController {
     } else {
       showSnackBar1("Failed", result.errorMessage.toString());
     }
-    showSaveProgress.value = false;
+    isLoading.value = false;
   }
 
 

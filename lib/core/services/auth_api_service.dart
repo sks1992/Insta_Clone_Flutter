@@ -14,7 +14,7 @@ class AuthApiService extends GetConnect {
 
   @override
   void onInit() async {
-    httpClient.baseUrl = _urlService.getApiBaseUrl();
+    httpClient.baseUrl = _urlService.getUserApiUrl();
     httpClient.timeout = const Duration(minutes: 1);
 
     httpClient.addRequestModifier<void>((request) {
