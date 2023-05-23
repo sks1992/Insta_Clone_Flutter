@@ -2,16 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 import '../../ui/screens/add_post_screen.dart';
+import '../../ui/screens/feed_screen.dart';
 import 'auth_controller.dart';
 
 class DashboardController extends GetxController {
   final _auth = Get.find<AuthController>();
 
-
   List<Widget> homeScreenItems = [
-    const Center(
-      child: Text("Home"),
-    ),
+    FeedScreen(),
     const Center(
       child: Text("Search"),
     ),
@@ -23,7 +21,6 @@ class DashboardController extends GetxController {
       child: Text("Profile"),
     ),
   ];
-
 
   var pages = 0.obs;
 

@@ -14,14 +14,12 @@ class LoginController extends GetxController {
 
   late TextEditingController emailOrMobileNoOrUserNameController;
   late TextEditingController passwordController;
-
   var isLoading = false.obs;
 
   @override
   void onInit() {
-    emailOrMobileNoOrUserNameController =
-        TextEditingController(text: "sandeep");
-    passwordController = TextEditingController(text: "1234567");
+    emailOrMobileNoOrUserNameController = TextEditingController();
+    passwordController = TextEditingController();
     super.onInit();
   }
 
@@ -42,9 +40,7 @@ class LoginController extends GetxController {
     var result = await _authApi.loginUser(model);
     if (result.isSuccess) {
       _sharedService.storeAuthToken(result.token!);
-      var token = await _sharedService.getAuthToken();
-      print(token);
-
+      _sharedService.storeUser(result);
       _authController.loggedIn.value = true;
     } else {
       showSnackBar1("Failed", result.errorMessage.toString());

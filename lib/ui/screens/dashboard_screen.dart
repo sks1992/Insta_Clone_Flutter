@@ -11,8 +11,8 @@ class DashBoardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: PageView(
+        physics: const NeverScrollableScrollPhysics(),
         controller: controller.pageController,
         onPageChanged: controller.onPageChanged,
         children: controller.homeScreenItems,

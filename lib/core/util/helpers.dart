@@ -112,3 +112,14 @@ IOSUiSettings get imageCropIosUISettings => IOSUiSettings(
 String base64String(Uint8List data) {
   return base64Encode(data);
 }
+
+Image imageFromBase64String(String base64String) {
+  return Image.memory(base64Decode(base64String));
+}
+
+Uint8List dataFromBase64String(String base64String) {
+  return base64Decode(base64String
+      .replaceAll("data:image/png;base64,", "")
+      .replaceAll("data:image/jpg;base64,", "")
+      .replaceAll("data:image/jpeg;base64,", ""));
+}

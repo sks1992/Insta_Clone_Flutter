@@ -27,8 +27,10 @@ class InstaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       enableLog: true,
       title: 'Insta Clone',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      theme: ThemeData().copyWith(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 63, 17, 177)),
       ),
       initialRoute: RouteNames.splash,
       getPages: AppRoute.route,

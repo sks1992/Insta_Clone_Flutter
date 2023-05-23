@@ -31,18 +31,19 @@ class RegisterScreen extends StatelessWidget {
                 Stack(
                   children: [
                     Obx(
-                          () => controller.profileImage.value == null
+                      () => controller.profileImage.value == null
                           ? const CircleAvatar(
-                        radius: 64,
-                        backgroundColor: Colors.white,
-                        backgroundImage: AssetImage("assets/no_image.png"),
-                      )
+                              radius: 64,
+                              backgroundColor: Colors.white,
+                              backgroundImage:
+                                  AssetImage("assets/no_image.png"),
+                            )
                           : CircleAvatar(
-                        radius: 64,
-                        backgroundColor: Colors.white,
-                        backgroundImage:
-                        MemoryImage(controller.profileImage.value!),
-                      ),
+                              radius: 64,
+                              backgroundColor: Colors.white,
+                              backgroundImage:
+                                  MemoryImage(controller.profileImage.value!),
+                            ),
                     ),
                     Positioned(
                       bottom: -10,
@@ -53,7 +54,8 @@ class RegisterScreen extends StatelessWidget {
                             AlertDialog(
                               title: const Text("Choose"),
                               content: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   SizedBox(
                                     height: Get.height * 0.1,
@@ -63,8 +65,8 @@ class RegisterScreen extends StatelessWidget {
                                             controller.profileImage);
                                         Get.back();
                                       },
-                                      child: Column(
-                                        children: const [
+                                      child: const Column(
+                                        children: [
                                           Padding(
                                             padding: EdgeInsets.all(4.0),
                                             child: Icon(
@@ -75,7 +77,8 @@ class RegisterScreen extends StatelessWidget {
                                           ),
                                           Text(
                                             "Camera",
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           )
                                         ],
                                       ),
@@ -88,10 +91,9 @@ class RegisterScreen extends StatelessWidget {
                                         controller.getImage(ImageSource.gallery,
                                             controller.profileImage);
                                         Get.back();
-                                        Get.back();
                                       },
-                                      child: Column(
-                                        children: const [
+                                      child: const Column(
+                                        children: [
                                           Padding(
                                             padding: EdgeInsets.all(4.0),
                                             child: Icon(
@@ -102,7 +104,8 @@ class RegisterScreen extends StatelessWidget {
                                           ),
                                           Text(
                                             "Gallery",
-                                            style: TextStyle(color: Colors.grey),
+                                            style:
+                                                TextStyle(color: Colors.grey),
                                           )
                                         ],
                                       ),
@@ -112,13 +115,14 @@ class RegisterScreen extends StatelessWidget {
                               ),
                               actions: [
                                 TextButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: const Text(
-                                      "CLOSE",
-                                      style: TextStyle(color: Colors.black),
-                                    ))
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: const Text(
+                                    "CLOSE",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                ),
                               ],
                             ),
                           );
@@ -153,8 +157,8 @@ class RegisterScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 NewElevatedButton(
                   label: "Register",
-                  onPressed: () async  {
-                   await controller.userRegister();
+                  onPressed: () async {
+                    await controller.userRegister();
                   },
                 ),
                 Row(
