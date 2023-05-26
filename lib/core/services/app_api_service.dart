@@ -15,4 +15,18 @@ class AppApiService extends BaseApiService {
     }
     return ResultModel.fromJson(json.decode(response.bodyString!));
   }
+
+  Future<List<Posts>> getAllPost() async {
+    var response = await get('/allPosts');
+
+    if (response.hasError) {
+      return [];
+    } else {
+      List<dynamic> _postList = jsonDecode(response.bodyString!);
+      final _list =
+          _postList.map((e) => Posts.fromJson(e)).toList();
+
+      return _list;
+    }
+  }
 }

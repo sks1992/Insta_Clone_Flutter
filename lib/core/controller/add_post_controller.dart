@@ -13,7 +13,7 @@ import '../services/shared_pref_service.dart';
 import '../util/helpers.dart';
 
 class AddPostController extends GetxController {
-  final _authApi = Get.find<AppApiService>();
+  final _appApi = Get.find<AppApiService>();
   final _sharedService = Get.find<SharedPrefService>();
 
   late final ImagePicker _imagePicker;
@@ -50,7 +50,7 @@ class AddPostController extends GetxController {
     );
 
     isLoading.value = true;
-    var result = await _authApi.createPostReal(model);
+    var result = await _appApi.createPostReal(model);
     if (result.isSuccess) {
       postImage.value = null;
       captionController.text = '';
