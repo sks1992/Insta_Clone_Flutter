@@ -3,11 +3,8 @@ import 'package:get/get.dart';
 
 import '../../ui/screens/add_post_screen.dart';
 import '../../ui/screens/feed_screen.dart';
-import 'auth_controller.dart';
 
 class DashboardController extends GetxController {
-  final _auth = Get.find<AuthController>();
-
   List<Widget> homeScreenItems = [
     FeedScreen(),
     const Center(
@@ -27,7 +24,7 @@ class DashboardController extends GetxController {
   late PageController pageController;
 
   @override
-  void onInit() {
+  void onInit() async {
     pageController = PageController();
     super.onInit();
   }
@@ -44,9 +41,5 @@ class DashboardController extends GetxController {
 
   void navigationTapped(int page) {
     pageController.jumpToPage(page);
-  }
-
-  void logout() {
-    _auth.logout();
   }
 }

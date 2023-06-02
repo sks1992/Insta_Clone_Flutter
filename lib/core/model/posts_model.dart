@@ -33,6 +33,7 @@ class Posts {
     required this.postDescription,
     required this.postImage,
     required this.publishedDate,
+    required this.postLikes,
   });
 
   late final int postId;
@@ -42,6 +43,7 @@ class Posts {
   late final String postDescription;
   late final String postImage;
   late final String publishedDate;
+  late final int postLikes;
 
   Posts.fromJson(Map<String, dynamic> json) {
     postId = json['postId'];
@@ -51,6 +53,7 @@ class Posts {
     postDescription = json['postDescription'];
     postImage = json['postImage'];
     publishedDate = json['publishedDate'];
+    postLikes = json['postLikes'];
   }
 
   Map<String, dynamic> toJson() {
@@ -62,6 +65,7 @@ class Posts {
     _data['postDescription'] = postDescription;
     _data['postImage'] = postImage;
     _data['publishedDate'] = publishedDate;
+    _data['postLikes'] = postLikes;
     return _data;
   }
 }

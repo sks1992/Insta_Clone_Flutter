@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:insta_clone_flutter/core/controller/auth_controller.dart';
 
 import '../model/login_models.dart';
 import '../model/posts_model.dart';
@@ -15,6 +16,8 @@ import '../util/helpers.dart';
 class AddPostController extends GetxController {
   final _appApi = Get.find<AppApiService>();
   final _sharedService = Get.find<SharedPrefService>();
+
+  final _authController =Get.find<AuthController>();
 
   late final ImagePicker _imagePicker;
   late final ImageCropper _cropper;
@@ -38,6 +41,10 @@ class AddPostController extends GetxController {
   void onClose() {
     captionController.dispose();
     super.onClose();
+  }
+
+  void logout(){
+    _authController.logout();
   }
 
   Future<void> postReal() async {

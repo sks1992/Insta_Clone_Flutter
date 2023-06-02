@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../app_routes.dart';
+import '../model/login_models.dart';
 import '../services/shared_pref_service.dart';
 
 class AuthController extends GetxController {

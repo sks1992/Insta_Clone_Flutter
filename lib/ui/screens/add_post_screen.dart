@@ -134,9 +134,14 @@ class AddPostScreen extends StatelessWidget {
                                     AssetImage('assets/background.jpg'),
                               )
                             : CircleAvatar(
-                                backgroundImage: MemoryImage(base64Decode(
-                                    base64String(dataFromBase64String(
-                                        controller.user.userImage!)))),
+                                backgroundImage: MemoryImage(
+                                  base64Decode(
+                                    base64String(
+                                      dataFromBase64String(
+                                          controller.user.userImage!),
+                                    ),
+                                  ),
+                                ),
                               ),
                         const SizedBox(width: 16),
                         SizedBox(

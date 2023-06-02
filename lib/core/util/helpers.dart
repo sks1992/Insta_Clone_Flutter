@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:intl/intl.dart';
 
 
 void hideKeyboard() {
@@ -122,4 +123,57 @@ Uint8List dataFromBase64String(String base64String) {
       .replaceAll("data:image/png;base64,", "")
       .replaceAll("data:image/jpg;base64,", "")
       .replaceAll("data:image/jpeg;base64,", ""));
+}
+
+
+
+DateFormat _dateFormatMN = DateFormat('dd MMM yyyy');
+DateFormat _dateFormatMN2 = DateFormat('dd-MMM-yyyy');
+DateFormat _dateFormatMNTime = DateFormat('dd MMM yyyy hh:mm a');
+NumberFormat _numberFormat = NumberFormat('##,##,###.##');
+
+String getFormattedDate(String date) {
+  if (date.isEmpty) {
+    return "-";
+  }
+  return _dateFormatMN.format(DateTime.parse(date));
+}
+
+String getFormattedDate2(String date) {
+  if (date.isEmpty) {
+    return "-";
+  }
+  return _dateFormatMN2.format(DateTime.parse(date));
+}
+
+DateTime getDateTimeFromString(String date) {
+  return _dateFormatMN2.parse(date);
+}
+
+String getFormattedDateTime(String date) {
+  if (date.isEmpty) {
+    return "-";
+  }
+  return _dateFormatMNTime.format(DateTime.parse(date));
+}
+
+String getFormattedDateTimeOfDate(DateTime? date) {
+  if (date == null) {
+    return "";
+  }
+  return _dateFormatMNTime.format(date);
+}
+
+String getFormattedAmount(double value) {
+  const rupeeSymbol = "\u20B9";
+  if (value == 0) {
+    return "$rupeeSymbol 0";
+  }
+  return "$rupeeSymbol ${_numberFormat.format(value)}";
+}
+
+NumberFormat numberFormat = NumberFormat("#,##0.00", "en_US");
+
+String getFormattedValue(double value) {
+  return _numberFormat.format(value);
 }

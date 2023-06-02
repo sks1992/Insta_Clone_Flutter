@@ -3,11 +3,15 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../core/controller/feed_controller.dart';
 import '../../core/model/posts_model.dart';
 import '../../core/util/helpers.dart';
 
 class PostCard extends StatelessWidget {
-  const PostCard({Key? key, required this.post}) : super(key: key);
+  const PostCard({Key? key, required this.post, required this.controller})
+      : super(key: key);
+
+  final FeedController controller;
 
   final Posts post;
 
@@ -101,10 +105,17 @@ class PostCard extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite,
-                  color: Colors.red,
+                onPressed: () async {
+                  controller.isPostLiked.value = true;
+                  await controller.postLikes(
+                      controller.user.value.userId!, post.userId,post.postId, controller.isPostLiked.value);
+                },
+                icon: Obx(
+                  () => Icon(
+                    Icons.favorite,
+                    color:
+                        controller.isPostLiked.value ? Colors.red : Colors.grey,
+                  ),
                 ),
               ),
               IconButton(
@@ -158,7 +169,7 @@ class PostCard extends StatelessWidget {
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                          text: " ${post.postDescription}",
+                          text: "- ${post.postDescription}",
                         ),
                       ],
                     ),
@@ -178,7 +189,7 @@ class PostCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
-                    post.publishedDate,
+                    getFormattedDate(post.publishedDate),
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w400),
                   ),
